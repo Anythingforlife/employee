@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form @submit="onSubmit">
           <b-form-group
             id="input-group-2"
             label="Email address:"
@@ -19,11 +19,15 @@
           </b-form-group>
 
           <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-            <b-form-input id="input-2" v-model="form.name" required placeholder="Enter password"></b-form-input>
+            <b-form-input
+              id="input-2"
+              v-model="form.password"
+              required
+              placeholder="Enter password"
+            ></b-form-input>
           </b-form-group>
 
-          <b-button type="submit" variant="primary">Submit</b-button>
-          <b-button class="ml-2" type="reset" variant="danger">Reset</b-button>
+          <b-button type="submit" variant="primary">Login</b-button>
           <router-link class="ml-2" to="/sign-up">New user</router-link>
         </b-form>
       </div>
@@ -38,31 +42,14 @@ export default {
     return {
       form: {
         email: "",
-        name: "",
-        food: null,
-        checked: []
-      },
-      foods: [{ text: "Select One", value: null }, "Pune", "Mumbai", "Delhi"],
-      show: true
+        password: ""
+      }
     };
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.form));
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
     }
   }
 };

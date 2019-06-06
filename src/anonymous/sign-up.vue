@@ -76,6 +76,10 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+    goToLoginPage() {
+      this.$router.push("/login");
+      this.$router.push({ path: "/login" });
     }
   }
 };
