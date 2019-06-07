@@ -11,7 +11,7 @@ export const httpService = {
  * @param {string} url 
  */
 function get(url) {
-    return axios.post(Vue.config.apiURL + url).then(handleResponse).catch(handleError);
+    return axios.get(Vue.config.apiURL + url).then(handleResponse).catch(handleError);
 }
 
 /**

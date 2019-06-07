@@ -123,7 +123,7 @@ export default {
     this.PATTERNS = PATTERNS;
   },
   methods: {
-    handleSubmit(e) {
+    handleSubmit() {
       authenticationService.register(this.user).then(
         response => {
           this.$toaster.success(response.message);

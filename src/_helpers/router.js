@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Login from '../anonymous/login.vue';
 import Register from '../anonymous/register.vue';
-import HelloWorld from '../components/HelloWorld.vue';
+import Home from '../authenticated/Home.vue';
 import { storageService } from '../_services/storageService';
 
 Vue.use(Router);
@@ -11,7 +11,7 @@ Vue.use(Router);
 export const router = new Router({
     mode: 'history',
     routes: [
-        { path: '/', component: HelloWorld },
+        { path: '/', component: Home },
         { path: '/login', component: Login },
         { path: '/register', component: Register },
 
