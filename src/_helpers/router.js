@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import Login from '../anonymous/login.vue';
 import Register from '../anonymous/register.vue';
 import HelloWorld from '../components/HelloWorld.vue';
+import { storageService } from '../_services/storageService';
 
 Vue.use(Router);
 
@@ -23,7 +24,7 @@ router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = ['/login', '/register'];
     const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
+    const loggedIn = storageService.getData('user');
 
     if (authRequired && !loggedIn) {
         return next('/login');

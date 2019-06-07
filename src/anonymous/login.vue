@@ -6,25 +6,25 @@
           <h2>Login</h2>
           <form @submit.prevent="handleSubmit">
             <div class="form-group">
-              <label for="username">Username</label>
+              <label for="email">Email</label>
               <input
                 type="text"
-                v-model="username"
-                name="username"
+                v-model="user.email"
+                name="email"
                 v-validate="'required'"
-                id="username"
+                id="email"
                 class="form-control"
-                :class="{ 'is-invalid': usernameControlDirtyStatus &&  errors.has('username') }"
+                :class="{ 'is-invalid': emailControlDirtyStatus &&  errors.has('email') }"
               >
-              <div v-show="usernameControlDirtyStatus" class="invalid-feedback">
-                <span v-show="errors.has('username')">{{ errors.first('username') }}</span>
+              <div v-show="emailControlDirtyStatus" class="invalid-feedback">
+                <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
               </div>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
               <input
                 type="password"
-                v-model="password"
+                v-model="user.password"
                 name="password"
                 v-validate="'required'"
                 class="form-control"
@@ -50,12 +50,15 @@ import {
   isValidForm,
   formControlDirtyStatus
 } from "../_helpers/formValidation";
+import { authenticationService, storageService } from "../_services";
 export default {
   name: "Login",
   data() {
     return {
-      username: "",
-      password: ""
+      user: {
+        email: "",
+        password: ""
+      }
     };
   },
   created() {
@@ -64,20 +67,29 @@ export default {
   methods: {
     handleSubmit(e) {
       this.submitted = true;
-      console.log("login");
+      authenticationService.login(this.user).then(
+        response => {
+          storageService.storeData("user", response);
+          this.$router.push({ path: "/home" });
+        },
+        error => {
+          this.$toaster.error(error.message);
+        }
+      );
     }
   },
   computed: {
     isValidForm() {
       return isValidForm(this.fields);
     },
-    usernameControlDirtyStatus() {
+    emailControlDirtyStatus() {
       return formControlDirtyStatus(this.fields, "username");
     },
     passwordControlDirtyStatus() {
       return formControlDirtyStatus(this.fields, "username");
     }
-  }
+  },
+  beforeDestroy() {}
 };
 </script>
 

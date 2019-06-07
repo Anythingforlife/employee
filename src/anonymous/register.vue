@@ -103,6 +103,7 @@
 
 <script>
 import { isValidForm, formControlDirtyStatus, PATTERNS } from "../_helpers";
+import { authenticationService } from "../_services/authenticationService";
 export default {
   name: "Register",
   data() {
@@ -115,8 +116,7 @@ export default {
         username: "",
         password: "",
         confirmPassword: ""
-      },
-      submitted: false
+      }
     };
   },
   created() {
@@ -124,7 +124,15 @@ export default {
   },
   methods: {
     handleSubmit(e) {
-      this.submitted = true;
+      authenticationService.register(this.user).then(
+        response => {
+          this.$toaster.success(response.message);
+          this.$router.push("/login");
+        },
+        error => {
+          this.$toaster.error(error.message);
+        }
+      );
     }
   },
   computed: {
