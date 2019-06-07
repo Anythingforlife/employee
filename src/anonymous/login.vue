@@ -1,55 +1,81 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <b-form @submit="onSubmit">
-          <b-form-group
-            id="input-group-2"
-            label="Email address:"
-            label-for="input-1"
-            description="We'll never share your email with anyone else."
-          >
-            <b-form-input
-              id="input-1"
-              v-model="form.email"
-              type="email"
-              required
-              placeholder="Enter email"
-            ></b-form-input>
-          </b-form-group>
-
-          <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-            <b-form-input
-              id="input-2"
-              v-model="form.password"
-              required
-              placeholder="Enter password"
-            ></b-form-input>
-          </b-form-group>
-
-          <b-button type="submit" variant="primary">Login</b-button>
-          <router-link class="ml-2" to="/sign-up">New user</router-link>
-        </b-form>
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+          <h2>Login</h2>
+          <form @submit.prevent="handleSubmit">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                v-model="username"
+                name="username"
+                v-validate="'required'"
+                id="username"
+                class="form-control"
+                :class="{ 'is-invalid': usernameControlDirtyStatus &&  errors.has('username') }"
+              >
+              <div v-show="usernameControlDirtyStatus" class="invalid-feedback">
+                <span v-show="errors.has('username')">{{ errors.first('username') }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                v-model="password"
+                name="password"
+                v-validate="'required'"
+                class="form-control"
+                :class="{ 'is-invalid': passwordControlDirtyStatus && errors.has('password') }"
+              >
+              <div v-show="passwordControlDirtyStatus" class="invalid-feedback">
+                <span v-show="errors.has('password')">{{ errors.first('password') }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" :disabled="isValidForm">Login</button>
+              <router-link to="/register" class="btn btn-link">Register</router-link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {
+  isValidForm,
+  formControlDirtyStatus
+} from "../_helpers/formValidation";
 export default {
   name: "Login",
   data() {
     return {
-      form: {
-        email: "",
-        password: ""
-      }
+      username: "",
+      password: ""
     };
   },
+  created() {
+    // work as onInit
+  },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
+    handleSubmit(e) {
+      this.submitted = true;
+      console.log("login");
+    }
+  },
+  computed: {
+    isValidForm() {
+      return isValidForm(this.fields);
+    },
+    usernameControlDirtyStatus() {
+      return formControlDirtyStatus(this.fields, "username");
+    },
+    passwordControlDirtyStatus() {
+      return formControlDirtyStatus(this.fields, "username");
     }
   }
 };
