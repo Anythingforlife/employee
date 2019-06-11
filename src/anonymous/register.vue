@@ -103,7 +103,6 @@
 
 <script>
 import { isValidForm, formControlDirtyStatus, PATTERNS } from "../_helpers";
-import { authenticationService } from "../_services/authenticationService";
 import { mapActions } from "vuex";
 import { STORE_MODULE, STORE_TYPE, CONSTANT } from "../_helpers/constant";
 
@@ -133,25 +132,25 @@ export default {
   },
   computed: {
     isValidForm() {
-      return isValidForm(this.fields);
+      return isValidForm(this.veeFields);
     },
     firstNameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, CONSTANT.FIRST_NAME);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.FIRST_NAME);
     },
     lastNameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, CONSTANT.LAST_NAME);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.LAST_NAME);
     },
     emailControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, CONSTANT.EMAIL);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.EMAIL);
     },
     usernameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, CONSTANT.USERNANE);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.USERNANE);
     },
     passwordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, CONSTANT.PASSWORD);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.PASSWORD);
     },
     confirmPasswordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, CONSTANT.CONFIRM_PASSWORD);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.CONFIRM_PASSWORD);
     }
   }
 };

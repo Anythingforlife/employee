@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { STORE_TYPE, STORE_MODULE } from "../../_helpers/constant";
 export default {
   name: "HeaderPage",

@@ -64,19 +64,19 @@ export default {
   },
   methods: {
     ...mapActions(STORE_MODULE.LOGIN, [STORE_TYPE.LOGIN]),
-    handleSubmit(e) {
+    handleSubmit() {
       this[STORE_TYPE.LOGIN](this.user);
     }
   },
   computed: {
     isValidForm() {
-      return isValidForm(this.fields);
+      return isValidForm(this.veeFields);
     },
     emailControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, CONSTANT.EMAIL);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.EMAIL);
     },
     passwordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, CONSTANT.PASSWORD);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.PASSWORD);
     }
   },
   beforeDestroy() {}

@@ -22,7 +22,7 @@ export default {
     ...mapActions(STORE_MODULE.TOASTER, [STORE_TYPE.CLEAR])
   },
   watch: {
-    message(newValue, oldValue) {
+    message(newValue) {
       if (newValue) {
         this.$toaster[this.type](newValue);
         this[STORE_TYPE.CLEAR]();

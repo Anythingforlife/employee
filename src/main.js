@@ -22,7 +22,9 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false;
 Vue.config.apiURL = 'http://192.168.2.188:4000';
 
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, {
+  fieldsBagName: 'veeFields'
+});
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(Toaster, { timeout: 5000 })

@@ -33,7 +33,6 @@ export const CONSTANT = {
     FIRST_NAME: 'firstName',
     LAST_NAME: 'lastName',
     USERNANE: 'username',
-    FIRST_NAME: 'firstName',
     EMAIL: 'email',
     PASSWORD: 'password',
     CONFIRM_PASSWORD: 'confirmPassword',
