@@ -37,5 +37,5 @@ function handleResponse(response) {
  * @param {any} error 
  */
 function handleError(error) {
-    return Promise.reject(error.response.data);
+    return Promise.reject(error.response ? error.response.data : { message: error.message });
 }

@@ -1,11 +1,10 @@
 <template>
-  <div class="text-center" v-show="showLoader">
+  <div class="custom-loader" v-show="showLoader">
     <b-spinner
       variant="danger"
       style="width: 4rem; height: 4rem; margin:auto"
       label="Large Spinner"
     ></b-spinner>
-    <!-- type="grow" -->
   </div>
 </template>
 <script>
@@ -29,7 +28,7 @@ export default {
           this.showLoader = showLoader;
         },
         error => {
-          this.showLoader = error;
+          this.showLoader = false;
         }
       );
     }
@@ -39,3 +38,16 @@ export default {
   }
 };
 </script>
+
+<style>
+.custom-loader {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  align-content: center;
+  text-align: center;
+  display: flex;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+</style>

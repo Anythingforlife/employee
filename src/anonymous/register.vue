@@ -104,6 +104,9 @@
 <script>
 import { isValidForm, formControlDirtyStatus, PATTERNS } from "../_helpers";
 import { authenticationService } from "../_services/authenticationService";
+import { mapActions } from "vuex";
+import { STORE_MODULE, STORE_TYPE, CONSTANT } from "../_helpers/constant";
+
 export default {
   name: "Register",
   data() {
@@ -124,40 +127,32 @@ export default {
   },
   methods: {
     handleSubmit() {
-      authenticationService.register(this.user).then(
-        response => {
-          this.$toaster.success(response.message);
-          this.$router.push("/login");
-        },
-        error => {
-          this.$toaster.error(error.message);
-        }
-      );
-    }
+      this[STORE_TYPE.REGISTER](this.user);
+    },
+    ...mapActions(STORE_MODULE.LOGIN, [STORE_TYPE.REGISTER])
   },
   computed: {
     isValidForm() {
       return isValidForm(this.fields);
     },
     firstNameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "firstName");
+      return formControlDirtyStatus(this.fields, CONSTANT.FIRST_NAME);
     },
     lastNameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "lastName");
+      return formControlDirtyStatus(this.fields, CONSTANT.LAST_NAME);
     },
     emailControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "email");
+      return formControlDirtyStatus(this.fields, CONSTANT.EMAIL);
     },
     usernameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "username");
+      return formControlDirtyStatus(this.fields, CONSTANT.USERNANE);
     },
     passwordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "password");
+      return formControlDirtyStatus(this.fields, CONSTANT.PASSWORD);
     },
     confirmPasswordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "confirmPassword");
+      return formControlDirtyStatus(this.fields, CONSTANT.CONFIRM_PASSWORD);
     }
   }
 };
 </script>
-

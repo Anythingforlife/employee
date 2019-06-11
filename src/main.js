@@ -13,6 +13,7 @@ import { Interceptor } from './core'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee, faUserSecret, faPowerOff } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import store from './store/'
 
 library.add(faCoffee, faUserSecret, faPowerOff)
 
@@ -31,5 +32,6 @@ Interceptor.response();
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

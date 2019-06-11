@@ -50,7 +50,8 @@ import {
   isValidForm,
   formControlDirtyStatus
 } from "../_helpers/formValidation";
-import { authenticationService, storageService } from "../_services";
+import { mapActions } from "vuex";
+import { STORE_MODULE, STORE_TYPE, CONSTANT } from "../_helpers/constant";
 export default {
   name: "Login",
   data() {
@@ -61,21 +62,10 @@ export default {
       }
     };
   },
-  created() {
-    // work as onInit
-  },
   methods: {
+    ...mapActions(STORE_MODULE.LOGIN, [STORE_TYPE.LOGIN]),
     handleSubmit(e) {
-      this.submitted = true;
-      authenticationService.login(this.user).then(
-        response => {
-          storageService.storeData("user", response);
-          this.$router.push({ path: "/home" });
-        },
-        error => {
-          this.$toaster.error(error.message);
-        }
-      );
+      this[STORE_TYPE.LOGIN](this.user);
     }
   },
   computed: {
@@ -83,13 +73,12 @@ export default {
       return isValidForm(this.fields);
     },
     emailControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "username");
+      return formControlDirtyStatus(this.fields, CONSTANT.EMAIL);
     },
     passwordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "username");
+      return formControlDirtyStatus(this.fields, CONSTANT.PASSWORD);
     }
   },
   beforeDestroy() {}
 };
 </script>
-
