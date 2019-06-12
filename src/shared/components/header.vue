@@ -2,7 +2,7 @@
   <div>
     <b-alert variant="secondary" show>
       <div class="text-right mr-2">
-        <span class="mr-2">{{user.email}}</span>
+        <span class="mr-2">{{user ? user.email: ''}}</span>
         <b-button variant="danger" @click="logout" v-b-tooltip.hover title="Logout">
           <font-awesome-icon icon="power-off"/>
         </b-button>

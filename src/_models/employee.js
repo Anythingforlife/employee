@@ -22,5 +22,16 @@ export const columns = [
   {
     key: "profile_image",
     label: "Profile image"
+  },
+  {
+    key: 'actions',
+    label: 'Actions'
   }
 ];
+
+export const employee = {
+  "employee_name": null,
+  "employee_salary": null,
+  "employee_age": null,
+  "profile_image": null
+}

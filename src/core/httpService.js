@@ -2,7 +2,9 @@ import Vue from 'vue'
 import axios from 'axios';
 export const httpService = {
     get,
-    post
+    post,
+    putMethod,
+    deleteMethod
 }
 
 /**
@@ -21,6 +23,23 @@ function get(url) {
  */
 function post(url, data) {
     return axios.post(Vue.config.apiURL + url, data).then(handleResponse).catch(handleError);
+}
+
+/**
+ * Put method
+ * @param {string} url 
+ * @param {any} data 
+ */
+function putMethod(url, data) {
+    return axios.put(Vue.config.apiURL + url, data).then(handleResponse).catch(handleError);
+}
+
+/**
+ * Delete method
+ * @param {string} url 
+ */
+function deleteMethod(url, data) {
+    return axios.delete(Vue.config.apiURL + url).then(handleResponse).catch(handleError);
 }
 
 /**

@@ -3,7 +3,7 @@ import { STORE_TYPE, CONSTANT } from "../_helpers/constant";
 import { router } from '../_helpers';
 
 const state = {
-  user: storageService.getData(CONSTANT.USER) || {}
+  user: storageService.getData(CONSTANT.USER)
 }
 
 const getters = {
