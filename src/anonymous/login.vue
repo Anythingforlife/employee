@@ -6,25 +6,25 @@
           <h2>Login</h2>
           <form @submit.prevent="handleSubmit">
             <div class="form-group">
-              <label for="username">Username</label>
+              <label for="email">Email</label>
               <input
                 type="text"
-                v-model="username"
-                name="username"
+                v-model="user.email"
+                name="email"
                 v-validate="'required'"
-                id="username"
+                id="email"
                 class="form-control"
-                :class="{ 'is-invalid': usernameControlDirtyStatus &&  errors.has('username') }"
+                :class="{ 'is-invalid': emailControlDirtyStatus &&  errors.has('email') }"
               >
-              <div v-show="usernameControlDirtyStatus" class="invalid-feedback">
-                <span v-show="errors.has('username')">{{ errors.first('username') }}</span>
+              <div v-show="emailControlDirtyStatus" class="invalid-feedback">
+                <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
               </div>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
               <input
                 type="password"
-                v-model="password"
+                v-model="user.password"
                 name="password"
                 v-validate="'required'"
                 class="form-control"
@@ -50,34 +50,35 @@ import {
   isValidForm,
   formControlDirtyStatus
 } from "../_helpers/formValidation";
+import { mapActions } from "vuex";
+import { STORE_MODULE, STORE_TYPE, CONSTANT } from "../_helpers/constant";
 export default {
   name: "Login",
   data() {
     return {
-      username: "",
-      password: ""
+      user: {
+        email: "",
+        password: ""
+      }
     };
   },
-  created() {
-    // work as onInit
-  },
   methods: {
-    handleSubmit(e) {
-      this.submitted = true;
-      console.log("login");
+    ...mapActions(STORE_MODULE.LOGIN, [STORE_TYPE.LOGIN]),
+    handleSubmit() {
+      this[STORE_TYPE.LOGIN](this.user);
     }
   },
   computed: {
     isValidForm() {
-      return isValidForm(this.fields);
+      return isValidForm(this.veeFields);
     },
-    usernameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "username");
+    emailControlDirtyStatus() {
+      return formControlDirtyStatus(this.veeFields, CONSTANT.EMAIL);
     },
     passwordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "username");
+      return formControlDirtyStatus(this.veeFields, CONSTANT.PASSWORD);
     }
-  }
+  },
+  beforeDestroy() {}
 };
 </script>
-

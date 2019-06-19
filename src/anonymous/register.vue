@@ -103,6 +103,9 @@
 
 <script>
 import { isValidForm, formControlDirtyStatus, PATTERNS } from "../_helpers";
+import { mapActions } from "vuex";
+import { STORE_MODULE, STORE_TYPE, CONSTANT } from "../_helpers/constant";
+
 export default {
   name: "Register",
   data() {
@@ -115,41 +118,40 @@ export default {
         username: "",
         password: "",
         confirmPassword: ""
-      },
-      submitted: false
+      }
     };
   },
   created() {
     this.PATTERNS = PATTERNS;
   },
   methods: {
-    handleSubmit(e) {
-      this.submitted = true;
-    }
+    handleSubmit() {
+      this[STORE_TYPE.REGISTER](this.user);
+    },
+    ...mapActions(STORE_MODULE.LOGIN, [STORE_TYPE.REGISTER])
   },
   computed: {
     isValidForm() {
-      return isValidForm(this.fields);
+      return isValidForm(this.veeFields);
     },
     firstNameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "firstName");
+      return formControlDirtyStatus(this.veeFields, CONSTANT.FIRST_NAME);
     },
     lastNameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "lastName");
+      return formControlDirtyStatus(this.veeFields, CONSTANT.LAST_NAME);
     },
     emailControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "email");
+      return formControlDirtyStatus(this.veeFields, CONSTANT.EMAIL);
     },
     usernameControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "username");
+      return formControlDirtyStatus(this.veeFields, CONSTANT.USERNANE);
     },
     passwordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "password");
+      return formControlDirtyStatus(this.veeFields, CONSTANT.PASSWORD);
     },
     confirmPasswordControlDirtyStatus() {
-      return formControlDirtyStatus(this.fields, "confirmPassword");
+      return formControlDirtyStatus(this.veeFields, CONSTANT.CONFIRM_PASSWORD);
     }
   }
 };
 </script>
-
