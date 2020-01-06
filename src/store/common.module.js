@@ -4,8 +4,8 @@ const state = {
 }
 
 const mutations = {
-  showHideLoader(state, payload) {
-    state.isLoading = payload;
+  showHideLoader(currentState, payload) {
+    currentState.isLoading = payload;
   }
 }
 

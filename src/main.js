@@ -20,7 +20,6 @@ library.add(faCoffee, faUserSecret, faPowerOff)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false;
-Vue.config.apiURL = 'http://192.168.2.188:4000';
 
 Vue.use(VeeValidate, {
   fieldsBagName: 'veeFields'

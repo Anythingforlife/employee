@@ -22,13 +22,13 @@ const actions = {
 };
 
 const mutations = {
-  message(state, payload) {
-    state.type = payload.type;
-    state.message = payload.message;
+  message(currentState, payload) {
+    currentState.type = payload.type;
+    currentState.message = payload.message;
   },
-  clear(state) {
-    state.type = null;
-    state.message = null;
+  clear(currentState) {
+    currentState.type = null;
+    currentState.message = null;
   }
 };
 

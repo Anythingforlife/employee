@@ -1,4 +1,4 @@
-import { employeeService, sharedSerivce } from "../_services/";
+import { employeeService, sharedService } from "../_services/";
 import { STORE_TYPE, CONSTANT } from "../_helpers/constant";
 import { router } from '../_helpers';
 import { employee } from '../_models/employee'
@@ -8,72 +8,72 @@ const state = {
   currentPage: 1,
   employees: {},
   currentPageData: [],
-  employee: sharedSerivce.cloneObject(employee),
+  employee: sharedService.cloneObject(employee),
   currentUrl: '/',
   isResetState: false
 }
 
 
 const getters = {
-  [STORE_TYPE.EMPLOYEE](state) {
-    return state.employee;
+  [STORE_TYPE.EMPLOYEE](currentState) {
+    return currentState.employee;
   },
-  allPaginationsData(state) {
-    return state.employees[state.currentPage];
+  allPaginationData(currentState) {
+    return currentState.employees[currentState.currentPage];
   },
-  currentPageData(state) {
-    return state.currentPageData;
+  currentPageData(currentState) {
+    return currentState.currentPageData;
   },
-  total(state) {
-    return state.total;
+  total(currentState) {
+    return currentState.total;
   },
-  errorMesssage(state) {
-    return state.errorMesssage;
+  errorMessage(currentState) {
+    return currentState.errorMessage;
   }
 }
 
 const mutations = {
-  [STORE_TYPE.UPDATE_CURRENT_PAGE_DATA](state, payload) {
-    const index = state.currentPageData.findIndex(data => {
+  [STORE_TYPE.UPDATE_CURRENT_PAGE_DATA](currentState, payload) {
+    const index = currentState.currentPageData.findIndex(data => {
       return data.id === payload.employeeId;
     });
-    state.employees[state.currentPage][index] = payload.employee;
-    state.currentPageData = state.employees[state.currentPage];
+    currentState.employees[currentState.currentPage][index] = payload.employee;
+    currentState.currentPageData = currentState.employees[currentState.currentPage];
   },
-  [STORE_TYPE.EMPLOYEE](state, payload) {
-    state.employee = sharedSerivce.cloneObject(payload ? payload : employee);
+  [STORE_TYPE.EMPLOYEE](currentState, payload) {
+    currentState.employee = sharedService.cloneObject(payload ? payload : employee);
   },
-  [STORE_TYPE.CURRENT_URL](state, payload) {
-    state.currentUrl = payload;
+  [STORE_TYPE.CURRENT_URL](currentState, payload) {
+    currentState.currentUrl = payload;
   },
-  [STORE_TYPE.IS_RESET_STATE](state, payload) {
-    state.isResetState = payload;
+  [STORE_TYPE.IS_RESET_STATE](currentState, payload) {
+    currentState.isResetState = payload;
   },
-  [STORE_TYPE.CLEAR](state) {
-    state.employees = {};
-    state.employee = sharedSerivce.cloneObject(employee)
-    state.total = 0
-    state.currentPage = 1;
-    state.currentPageData = [];
+  [STORE_TYPE.CLEAR](currentState) {
+    currentState.employees = {};
+    currentState.employee = sharedService.cloneObject(employee)
+    currentState.total = 0
+    currentState.currentPage = 1;
+    currentState.currentPageData = [];
   },
-  allPaginationsData(state, payload) {
-    state.employees[payload.currentPage] = payload.data;
+  allPaginationData(currentState, payload) {
+    currentState.employees[payload.currentPage] = payload.data;
   },
-  [STORE_TYPE.CURRENT_PAGE](state, payload) {
-    state.currentPage = payload;
+  [STORE_TYPE.CURRENT_PAGE](currentState, payload) {
+    currentState.currentPage = payload;
   },
-  total(state, payload) {
-    state.total = payload;
+  total(currentState, payload) {
+    currentState.total = payload;
   },
-  currentPageData(state, payload) {
+  currentPageData(currentState, payload) {
     if (payload.currentPage) {
-      state.currentPageData = state.employees[payload.currentPage]
+      currentState.currentPageData = currentState.employees[payload.currentPage]
       return;
     }
-    state.currentPageData = payload.data;
+    currentState.currentPageData = payload.data;
   },
-  errorMesssage(state, payload) {
-    state.errorMesssage = payload;
+  errorMessage(currentState, payload) {
+    currentState.errorMessage = payload;
   }
 }
 
@@ -95,7 +95,7 @@ const actions = {
   [STORE_TYPE.SET_CURRENT_URL]({ commit }, payload) {
     commit(STORE_TYPE.CURRENT_URL, payload);
   },
-  [STORE_TYPE.SET_IS_RESTE_STATE]({ commit }, payload) {
+  [STORE_TYPE.SET_IS_RESET_STATE]({ commit }, payload) {
     commit(STORE_TYPE.IS_RESET_STATE, payload);
   },
   loadCurrentPageData({ dispatch, commit }, payload) {

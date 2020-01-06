@@ -2,11 +2,11 @@ export const STORE_MODULE = {
     EMPLOYEES: 'employees',
     TOASTER: 'toaster',
     LOGIN: 'login',
-    COMMAN: 'comman'
+    COMMON: 'common'
 }
 
 export const STORE_TYPE = {
-    ALL_PAGINATION_DATA: 'allPaginationsData',
+    ALL_PAGINATION_DATA: 'allPaginationData',
     CURRENT_PAGE_DATA: 'currentPageData',
     TOTAL: 'total',
     LOAD_CURRENT_PAGE_DATA: 'loadCurrentPageData',
@@ -25,7 +25,7 @@ export const STORE_TYPE = {
     ADD_EMPLOYEE: 'addEmployee',
     EDIT_EMPLOYEE: 'editEmployee',
     SET_CURRENT_URL: 'setCurrentURL',
-    SET_IS_RESTE_STATE: 'setIsResetState',
+    SET_IS_RESET_STATE: 'setIsResetState',
     SELECTED_EMPLOYEE: 'selectedEmployee',
     UPDATE_CURRENT_PAGE_DATA: 'updateCurrentPageData',
     DELETE_EMPLOYEE: 'deleteEmployee',
@@ -42,7 +42,7 @@ export const CONSTANT = {
     USER: 'user',
     FIRST_NAME: 'firstName',
     LAST_NAME: 'lastName',
-    USERNANE: 'username',
+    USERNAME: 'username',
     EMAIL: 'email',
     PASSWORD: 'password',
     CONFIRM_PASSWORD: 'confirmPassword',
@@ -54,7 +54,6 @@ export const CONSTANT = {
     URL_HOME: '/home',
     URL_LOGIN: '/login',
     URL_ADD_EDIT: '/addEdit',
-    URL_ADD_EMPLOYEE: '/addEmployee',
     URL_ADD_EMPLOYEE: '/addEmployee',
     URL_EMPLOYEE: '/employee',
     URL_BLANK: '/'

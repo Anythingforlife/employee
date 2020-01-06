@@ -67,7 +67,6 @@ import {
 } from "../_helpers/formValidation";
 import { mapActions, mapGetters } from "vuex";
 import { STORE_MODULE, STORE_TYPE, CONSTANT } from "../_helpers/constant";
-import { employee } from "../_models/employee";
 export default {
   name: "AddUpdateEmployee",
   data() {
