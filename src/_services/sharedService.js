@@ -1,13 +1,13 @@
 import { Subject } from "rxjs";
 
-export const sharedSerivce = {
+export const sharedService = {
     showHideLoader,
     cloneObject,
     toggleLoader: new Subject()
 }
 
 function showHideLoader(show) {
-    sharedSerivce.toggleLoader.next(show);
+    sharedService.toggleLoader.next(show);
 }
 
 function cloneObject(data) {

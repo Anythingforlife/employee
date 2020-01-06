@@ -37,9 +37,8 @@
 import { columns } from "../_models/employee";
 import { STORE_MODULE, STORE_TYPE, CONSTANT } from "../_helpers/constant";
 import { mapActions, mapGetters, mapState } from "vuex";
-import { COPYFILE_EXCL } from "constants";
 export default {
-  name: "EmplpoyeeList",
+  name: "EmployeeList",
   data() {
     return {
       currentPage: 1,
@@ -69,7 +68,7 @@ export default {
   methods: {
     ...mapActions(STORE_MODULE.EMPLOYEES, [
       STORE_TYPE.LOAD_CURRENT_PAGE_DATA,
-      STORE_TYPE.SET_IS_RESTE_STATE,
+      STORE_TYPE.SET_IS_RESET_STATE,
       STORE_TYPE.SELECTED_EMPLOYEE,
       STORE_TYPE.DELETE_EMPLOYEE
     ]),
@@ -90,9 +89,9 @@ export default {
     }
   },
   watch: {
-    isResetState(newValue) {
+    isResetState() {
       if (this[STORE_TYPE.IS_RESET_STATE]) {
-        this[STORE_TYPE.SET_IS_RESTE_STATE](false);
+        this[STORE_TYPE.SET_IS_RESET_STATE](false);
         this.pageChange(1);
       }
     }
