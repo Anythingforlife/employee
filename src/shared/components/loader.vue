@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import { sharedSerivce } from "../../_services/sharedService";
+import { sharedService } from "../../_services/sharedService";
 import { Subscription } from "rxjs";
 export default {
   name: "LoaderPage",
@@ -23,11 +23,11 @@ export default {
   },
   methods: {
     toggleLoader() {
-      this.subscription$ = sharedSerivce.toggleLoader.subscribe(
+      this.subscription$ = sharedService.toggleLoader.subscribe(
         showLoader => {
           this.showLoader = showLoader;
         },
-        error => {
+        () => {
           this.showLoader = false;
         }
       );

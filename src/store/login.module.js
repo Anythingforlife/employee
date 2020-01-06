@@ -7,18 +7,18 @@ const state = {
 }
 
 const getters = {
-  profile(state) {
-    return state.user;
+  profile(currentState) {
+    return currentState.user;
   }
 }
 
 const mutations = {
-  profile(state, payload) {
-    state.user = payload;
+  profile(currentState, payload) {
+    currentState.user = payload;
     storageService.storeData(CONSTANT.USER, payload);
   },
-  logout(state) {
-    state.user = null;
+  logout(currentState) {
+    currentState.user = null;
     storageService.removeData(CONSTANT.USER);
     router.push({ path: CONSTANT.URL_LOGIN });
   }

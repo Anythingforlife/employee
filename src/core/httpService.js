@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import axios from 'axios';
 export const httpService = {
     get,
@@ -13,7 +12,7 @@ export const httpService = {
  * @param {string} url 
  */
 function get(url) {
-    return axios.get(Vue.config.apiURL + url).then(handleResponse).catch(handleError);
+    return axios.get(process.env.VUE_APP_API_URL + url).then(handleResponse).catch(handleError);
 }
 
 /**
@@ -22,7 +21,7 @@ function get(url) {
  * @param {any} data 
  */
 function post(url, data) {
-    return axios.post(Vue.config.apiURL + url, data).then(handleResponse).catch(handleError);
+    return axios.post(process.env.VUE_APP_API_URL + url, data).then(handleResponse).catch(handleError);
 }
 
 /**
@@ -31,15 +30,15 @@ function post(url, data) {
  * @param {any} data 
  */
 function putMethod(url, data) {
-    return axios.put(Vue.config.apiURL + url, data).then(handleResponse).catch(handleError);
+    return axios.put(process.env.VUE_APP_API_URL + url, data).then(handleResponse).catch(handleError);
 }
 
 /**
  * Delete method
  * @param {string} url 
  */
-function deleteMethod(url, data) {
-    return axios.delete(Vue.config.apiURL + url).then(handleResponse).catch(handleError);
+function deleteMethod(url) {
+    return axios.delete(process.env.VUE_APP_API_URL + url).then(handleResponse).catch(handleError);
 }
 
 /**

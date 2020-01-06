@@ -144,7 +144,7 @@ export default {
       return formControlDirtyStatus(this.veeFields, CONSTANT.EMAIL);
     },
     usernameControlDirtyStatus() {
-      return formControlDirtyStatus(this.veeFields, CONSTANT.USERNANE);
+      return formControlDirtyStatus(this.veeFields, CONSTANT.USERNAME);
     },
     passwordControlDirtyStatus() {
       return formControlDirtyStatus(this.veeFields, CONSTANT.PASSWORD);
