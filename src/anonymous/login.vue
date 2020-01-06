@@ -68,17 +68,16 @@ export default {
       this[STORE_TYPE.LOGIN](this.user);
     }
   },
-  computed: {
-    isValidForm() {
-      return isValidForm(this.veeFields);
-    },
-    emailControlDirtyStatus() {
-      return formControlDirtyStatus(this.veeFields, CONSTANT.EMAIL);
-    },
-    passwordControlDirtyStatus() {
-      return formControlDirtyStatus(this.veeFields, CONSTANT.PASSWORD);
-    }
-  },
-  beforeDestroy() {}
+  // computed: {
+  //   isValidForm() {
+  //     return isValidForm(this.veeFields);
+  //   },
+  //   emailControlDirtyStatus() {
+  //     return formControlDirtyStatus(this.veeFields, CONSTANT.EMAIL);
+  //   },
+  //   passwordControlDirtyStatus() {
+  //     return formControlDirtyStatus(this.veeFields, CONSTANT.PASSWORD);
+  //   }
+  // },
 };
 </script>
