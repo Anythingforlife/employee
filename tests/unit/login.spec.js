@@ -4,20 +4,20 @@ import VeeValidate from 'vee-validate';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import store from '@/store';
+import loginModule from '@/store/login.module';
 
-let url = 'test'
-let body = {}
-let mockError = false
+let url = '';
+let body = {};
+let mockError = false;
 
 jest.mock("axios", () => ({
   post: (_url, _body) => {
     return new Promise((resolve) => {
       if (mockError)
-        throw Error("Mock error")
-
-      url = _url
-      body = _body
-      resolve(true)
+        throw Error("Mock error");
+      url = _url;
+      body = _body;
+      resolve({ data: { token: 'fake jwt token' } });
     })
   }
 }))
@@ -50,11 +50,14 @@ describe("Login.vue", () => {
 
   it('authentication API is working', async () => {
     const commit = jest.fn();
-    const payload = { username: 'om', password: 'omprakash' };
-    await store._actions['login/login'][0]({ commit }, payload);
+    const dispatch = jest.fn();
+
+    const payload = { username: 'om@g.com', password: 'omprakash' };
+
+    await loginModule.actions.login({ dispatch, commit }, payload);
+
     expect(url).toBe(process.env.VUE_APP_API_URL + '/users/authenticate');
-    // expect(body).toEqual(payload);
-    // expect(commit).toHaveBeenCalledWith("profile", true);
+    expect(commit).toHaveBeenCalledWith("profile", { token: 'fake jwt token' });
   })
 
 });

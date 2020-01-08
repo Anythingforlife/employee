@@ -25,13 +25,14 @@ const mutations = {
 }
 
 const actions = {
-  [STORE_TYPE.LOGIN]({ dispatch, commit }, payload) {
-    authenticationService.login(payload).then(response => {
+  async [STORE_TYPE.LOGIN]({ dispatch, commit }, payload) {
+    try {
+      const response = await authenticationService.login(payload);
       commit(STORE_TYPE.PROFILE, response);
-      router.push({ path: CONSTANT.URL_HOME });
-    }, error => {
+      // router.push({ path: CONSTANT.URL_HOME });
+    } catch (error) {
       dispatch(STORE_TYPE.TOASTER_ERROR, error.message, { root: true });
-    });
+    }
   },
   [STORE_TYPE.REGISTER]({ dispatch }, payload) {
     authenticationService.register(payload).then(response => {
