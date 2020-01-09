@@ -5,21 +5,27 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import store from '@/store';
 import loginModule from '@/store/login.module';
+import toasterModule from '@/store/toaster.module';
+import { router } from '@/_helpers';
 
 let url = '';
 let body = {};
 let mockError = false;
+let mockUsers = [ { username: 'om@g.com', password: 'omprakash' } , [ { username: 'user2', password: 'user2' }]];
 
 jest.mock("axios", () => ({
   post: (_url, _body) => {
     return new Promise((resolve) => {
-      if (mockError)
-        throw Error("Mock error");
       url = _url;
       body = _body;
-      resolve({ data: { token: 'fake jwt token' } });
+
+      if (mockUsers.find(user=>user.username===_body.username && user.password===_body.password)) {
+        resolve({ data: { token: 'fake jwt token' } });
+        return;
+      }
+       throw Error("{message : 'username or password is invalid'}");        
     })
-  }
+  },
 }))
 
 
@@ -35,7 +41,8 @@ describe("Login.vue", () => {
   beforeEach(() => {
     wrapper = shallowMount(Login, {
       localVue,
-      store
+      store,
+      router
     });
 
   })
@@ -47,17 +54,36 @@ describe("Login.vue", () => {
   it('is a Vue instance', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
+  
 
-  it('authentication API is working', async () => {
-    const commit = jest.fn();
-    const dispatch = jest.fn();
+    it('login functionality authentication success', async () => {
+      const commit = jest.fn();
+      const dispatch = jest.fn();
+      const spy = jest.fn(); 
+      wrapper.vm.$router.push =  spy;
 
     const payload = { username: 'om@g.com', password: 'omprakash' };
 
     await loginModule.actions.login({ dispatch, commit }, payload);
 
-    expect(url).toBe(process.env.VUE_APP_API_URL + '/users/authenticate');
-    expect(commit).toHaveBeenCalledWith("profile", { token: 'fake jwt token' });
+      expect(url).toBe(process.env.VUE_APP_API_URL + '/users/authenticate');
+      expect(commit).toHaveBeenCalledWith("profile", { token: 'fake jwt token' });  
+      expect(spy).toHaveBeenCalledWith({ path: '/home' });
+    })
+
+
+
+  it('login functionality authentication failure', async () => {
+    const commit = jest.fn();
+    const dispatch = jest.fn();
+
+    const payload = { username: 'om@g.com', password: 'om' };
+
+    await loginModule.actions.login({ dispatch, commit }, payload);
+
+    expect(dispatch).toHaveBeenCalledWith("toaster/error","{message : 'username or password is invalid'}" ,{root:true});  
+    toasterModule.actions.error({ dispatch, commit },'username or password is invalid');
+    expect(commit).toHaveBeenCalledWith("message",{message : 'username or password is invalid', 'type':'error'});  
   })
 
 });

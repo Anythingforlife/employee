@@ -29,7 +29,7 @@ const actions = {
     try {
       const response = await authenticationService.login(payload);
       commit(STORE_TYPE.PROFILE, response);
-      // router.push({ path: CONSTANT.URL_HOME });
+      router.push({ path: CONSTANT.URL_HOME });
     } catch (error) {
       dispatch(STORE_TYPE.TOASTER_ERROR, error.message, { root: true });
     }
