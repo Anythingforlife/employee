@@ -1,5 +1,8 @@
 <template>
+<div>
   <h1 :style="headingStyles">{{title}} {{sum(2,3)}}</h1>
+  <button>test</button>
+  </div>
 </template>
 
 <script>
