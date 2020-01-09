@@ -10,8 +10,8 @@
         >Add new</b-button>
       </div>
       <b-table striped hover :items="employees" :fields="columns">
-        <template slot="actions" slot-scope="row">
-          <b-button variant="info" size="sm" @click="editEmployee(row.item)" class="mr-1">Edit</b-button>
+        <template v-slot:cell(actions)="row">
+          <b-button variant="info" size="md" @click="editEmployee(row.item)" class="mr-1">Edit</b-button>
           <b-button variant="danger" size="sm" @click="deleteEmployee(row.item.id)">Delete</b-button>
         </template>
       </b-table>
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="row">
-      <router-view/>
+      <router-view />
     </div>
   </div>
 </template>

@@ -20,10 +20,6 @@ export const columns = [
     sortable: true
   },
   {
-    key: "profile_image",
-    label: "Profile image"
-  },
-  {
     key: 'actions',
     label: 'Actions'
   }
@@ -32,6 +28,5 @@ export const columns = [
 export const employee = {
   "employee_name": null,
   "employee_salary": null,
-  "employee_age": null,
-  "profile_image": null
+  "employee_age": null
 }
