@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <div id="nav"></div>
-    <LoaderPage/>
-    <router-view/>
+    <LoaderPage />
+    <router-view />
   </div>
 </template>
 
