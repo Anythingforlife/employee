@@ -3,9 +3,7 @@ import VueRouter from 'vue-router'
 import VeeValidate from 'vee-validate'
 import Toaster from 'v-toaster'
 import BootstrapVue from "bootstrap-vue"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap-vue/dist/bootstrap-vue.css"
-import 'v-toaster/dist/v-toaster.css'
+import './scss/main.scss';
 
 import App from './App.vue'
 import { router } from './_helpers'

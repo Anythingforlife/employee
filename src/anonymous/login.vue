@@ -15,7 +15,7 @@
                 id="email"
                 class="form-control"
                 :class="{ 'is-invalid': emailControlDirtyStatus &&  errors.has('email') }"
-              >
+              />
               <div v-show="emailControlDirtyStatus" class="invalid-feedback">
                 <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
               </div>
@@ -29,7 +29,7 @@
                 v-validate="'required'"
                 class="form-control"
                 :class="{ 'is-invalid': passwordControlDirtyStatus && errors.has('password') }"
-              >
+              />
               <div v-show="passwordControlDirtyStatus" class="invalid-feedback">
                 <span v-show="errors.has('password')">{{ errors.first('password') }}</span>
               </div>
@@ -78,7 +78,6 @@ export default {
     passwordControlDirtyStatus() {
       return formControlDirtyStatus(this.veeFields, CONSTANT.PASSWORD);
     }
-  },
-  beforeDestroy() {}
+  }
 };
 </script>
